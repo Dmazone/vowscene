@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 공개 주소: `https://dmazone.github.io/vowscene/`
 - 영문 판매 페이지: `index.html`
 - 고객용 주문 정보 작성 페이지: `intake.html`
 - 운영자용 DM 명단판: `leads.html`
