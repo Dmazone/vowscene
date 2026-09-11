@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VowScene — Story brief</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{background:#f7f3ed;color:#1c1917;overflow-x:hidden}.serif{font-family:Georgia,Cambria,serif}label{overflow-wrap:anywhere}</style>
+</head>
+<body class="antialiased">
+  <main class="mx-auto max-w-3xl px-5 py-12">
+    <p class="text-sm tracking-[.22em] text-[#7b2f3c]">VOWSCENE</p>
+    <h1 class="serif mt-4 text-4xl">Tell us what only their people know.</h1>
+    <p class="mt-4 leading-7 text-stone-600">Short, honest details make the strongest film. Your answers stay in this browser until you copy them.</p>
+    <form id="brief" class="mt-10 space-y-6 rounded-2xl bg-white p-6 shadow-sm">
+      <label class="block">Studio / filmmaker<input name="studio" required class="mt-2 w-full rounded-lg border p-3"></label>
+      <label class="block">Couple's first names<input name="couple" required class="mt-2 w-full rounded-lg border p-3"></label>
+      <label class="block">How did they meet?<textarea name="meeting" required rows="3" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
+      <label class="block">Three specific memories, habits or private jokes<textarea name="details" required rows="4" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
+      <label class="block">What do they admire about each other?<textarea name="admire" rows="3" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
+      <label class="block">Tone<select name="tone" class="mt-2 w-full rounded-lg border p-3"><option>Romantic</option><option>Documentary</option><option>Playful</option></select></label>
+      <label class="block">Available footage / moments to feature<textarea name="footage" rows="3" class="mt-2 w-full rounded-lg border p-3" placeholder="First look, vows, coffee shop, family reactions..."></textarea></label>
+      <label class="block">Anything to avoid?<textarea name="avoid" rows="2" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
+      <label class="block">Target length<select name="length" class="mt-2 w-full rounded-lg border p-3"><option>60 seconds</option><option>75 seconds</option><option>90 seconds</option></select></label>
+      <button class="w-full rounded-full bg-[#7b2f3c] px-6 py-4 font-semibold text-white">Copy completed brief</button>
+      <p id="status" class="hidden text-sm"></p>
+    </form>
+  </main>
+  <script>
+    document.getElementById('brief').addEventListener('submit',async e=>{e.preventDefault();const rows=[...new FormData(e.target)].map(([k,v])=>`${k.toUpperCase()}: ${v.trim()}`);const text=`VOWSCENE STORY BRIEF\n\n${rows.join('\n\n')}`;const s=document.getElementById('status');try{await navigator.clipboard.writeText(text);s.textContent='Copied. Paste this into your conversation with VowScene.';s.className='text-sm text-green-700'}catch{s.textContent=text;s.className='whitespace-pre-wrap text-sm text-stone-600'}});
+  </script>
+</body>
+</html>

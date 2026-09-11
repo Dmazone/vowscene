@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VowScene DM 명단판</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f5f2ed;color:#262220;font:14px Arial,sans-serif}main{max-width:1500px;margin:auto;padding:24px}h1{font:32px Georgia,serif;margin:0 0 8px}.sub{color:#6b625c}.bar,.form{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.card{background:white;border:1px solid #ddd6ce;border-radius:14px;padding:16px}.form input,.form select,.bar button{border:1px solid #cfc6bd;border-radius:8px;padding:10px;background:white}.form input{min-width:150px;flex:1}.form button,.bar .primary{border:0;border-radius:8px;padding:10px 16px;background:#7b2f3c;color:white;cursor:pointer}button{cursor:pointer}table{width:100%;border-collapse:collapse;background:white;font-size:13px}th,td{text-align:left;border-bottom:1px solid #eee5dc;padding:10px;vertical-align:top}th{position:sticky;top:0;background:#272220;color:white}a{color:#7b2f3c}.danger{color:#9b1c1c;background:none;border:0}.stats{display:flex;gap:12px;flex-wrap:wrap}.stat{min-width:130px;background:white;border-radius:12px;padding:14px;border:1px solid #ddd6ce}.stat b{display:block;font-size:24px;margin-top:5px}@media(max-width:800px){.tablewrap{overflow:auto}table{min-width:1100px}}
+  </style>
+</head>
+<body><main>
+  <h1>VowScene DM 명단판</h1><p class="sub">데이터는 이 브라우저에만 저장됩니다. 30명씩 검증하고, 답장이 없는 문구는 즉시 바꿉니다.</p>
+  <section id="stats" class="stats"></section>
+  <form id="add" class="form card">
+    <input name="name" required placeholder="업체·작가명"><input name="country" placeholder="국가/도시"><input name="url" required type="url" placeholder="실제 프로필 URL">
+    <input name="note" placeholder="개인화 단서 (최근 작품 등)"><select name="status"><option>후보</option><option>DM 발송</option><option>답장</option><option>샘플 요청</option><option>청구서 발송</option><option>결제</option><option>제외</option></select><button>명단 추가</button>
+  </form>
+  <div class="bar"><button id="export" class="primary">CSV 백업</button><button id="clear">전체 삭제</button><span class="sub">삭제 전 CSV 백업 권장</span></div>
+  <div class="tablewrap card"><table><thead><tr><th>#</th><th>업체·작가</th><th>국가/도시</th><th>DM 주소</th><th>개인화 단서</th><th>상태</th><th>최근 접촉</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+  <script>
+    const KEY='vowscene-leads-v1',statuses=['후보','DM 발송','답장','샘플 요청','청구서 발송','결제','제외'];let leads=JSON.parse(localStorage.getItem(KEY)||'[]');
+    const save=()=>{localStorage.setItem(KEY,JSON.stringify(leads));render()};
+    function render(){const counts=Object.fromEntries(statuses.map(s=>[s,leads.filter(x=>x.status===s).length]));document.getElementById('stats').innerHTML=`<div class="stat">전체<b>${leads.length}</b></div><div class="stat">DM 발송<b>${counts['DM 발송']}</b></div><div class="stat">답장 이상<b>${counts['답장']+counts['샘플 요청']+counts['청구서 발송']+counts['결제']}</b></div><div class="stat">결제<b>${counts['결제']}</b></div>`;document.getElementById('rows').innerHTML=leads.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.name)}</td><td>${esc(x.country)}</td><td><a href="${esc(x.url)}" target="_blank" rel="noopener">프로필 열기</a></td><td>${esc(x.note)}</td><td><select data-i="${i}" class="status">${statuses.map(s=>`<option ${s===x.status?'selected':''}>${s}</option>`).join('')}</select></td><td>${x.touched||'-'}</td><td><button class="danger" data-del="${i}">삭제</button></td></tr>`).join('');document.querySelectorAll('.status').forEach(el=>el.onchange=()=>{const i=+el.dataset.i;leads[i].status=el.value;leads[i].touched=new Date().toISOString().slice(0,10);save()});document.querySelectorAll('[data-del]').forEach(el=>el.onclick=()=>{leads.splice(+el.dataset.del,1);save()})}
+    const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    document.getElementById('add').onsubmit=e=>{e.preventDefault();const x=Object.fromEntries(new FormData(e.target));leads.push({...x,touched:''});e.target.reset();save()};
+    document.getElementById('export').onclick=()=>{const q=v=>'"'+String(v||'').replaceAll('"','""')+'"',csv=['업체·작가,국가·도시,프로필 URL,개인화 단서,상태,최근 접촉',...leads.map(x=>[x.name,x.country,x.url,x.note,x.status,x.touched].map(q).join(','))].join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download='vowscene-leads.csv';a.click();URL.revokeObjectURL(a.href)};
+    document.getElementById('clear').onclick=()=>{if(confirm('명단 전체를 삭제할까요? 복구할 수 없습니다.')){leads=[];save()}};render();
+  </script>
+</main></body></html>
