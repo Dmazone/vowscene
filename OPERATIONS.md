@@ -41,6 +41,17 @@ If this fits your style, I can shape the couple's real story into a complete 60-
 5. 결제 완료를 PayPal 안에서 직접 확인한다. 이메일 캡처만 믿지 않는다.
 6. 확인 후 주문 질문지를 보낸다.
 
+### PayPal 인보이스에 사용할 고정 상품
+
+- 상품명: `VowScene - Custom wedding film voiceover script`
+- 통화 USD, 수량 1, 단가 29, 합계 US$29
+- 실물 배송 끄기. 부분 결제와 팁은 끈 상태 유지.
+- 설명: `Custom 60-90 second English wedding-film voiceover script, scene cues, editable text and PDF. One revision included. Digital delivery within 12 hours after payment and receipt of the complete story brief. No physical item.`
+- 고객 메모: `After payment, complete https://dmazone.github.io/vowscene/intake.html and paste the brief into our Instagram conversation. Delivery starts after payment and receipt of the complete brief.`
+- 구매 동의 고객의 이름/이메일을 입력하고 미리 보기에서 금액·판매자 표시·배송 없음·납기를 확인한 후 고객별 인보이스를 발행한다.
+- 고객별 인보이스 링크를 여러 고객에게 공용 결제 링크로 재사용하지 않는다.
+- 랜딩은 주문 접수 → Instagram에서 범위 확인 → 고객별 PayPal 인보이스 → 입금 확인 → 질문지 → 납품 순서다. 자동 결제/API 연동은 아직 없다.
+
 ## 5. 주문 질문지
 
 1. Couple's names and preferred pronunciation

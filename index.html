@@ -75,13 +75,15 @@
 
     <section id="order" class="mx-auto max-w-4xl px-6 py-24">
       <div class="reveal grid gap-12 md:grid-cols-[1fr_1.1fr]">
-        <div><p class="text-xs font-semibold uppercase tracking-[.25em] text-wine">Founding rate</p><h2 class="mt-4 font-serif text-5xl">$29</h2><p class="mt-5 leading-7 text-stone-600">Custom 60-90 second voiceover, scene cues, copy-ready text and one revision. Delivered within 12 hours after receiving the story.</p><p class="mt-4 text-sm text-stone-500">Only three founding-rate scripts are available.</p></div>
+        <div><p class="text-xs font-semibold uppercase tracking-[.25em] text-wine">Founding rate</p><h2 class="mt-4 font-serif text-5xl">$29</h2><p class="mt-5 leading-7 text-stone-600">Custom 60-90 second voiceover, scene cues, copy-ready text and one revision. Delivered within 12 hours after payment and receipt of the complete story brief.</p><p class="mt-4 text-sm text-stone-500">Only three founding-rate scripts are available.</p></div>
         <form id="requestForm" class="rounded-2xl border border-stone-300 bg-white p-6 shadow-sm">
           <label class="block text-sm font-semibold" for="name">Your name or studio</label><input id="name" required class="mt-2 w-full rounded-lg border border-stone-300 bg-paper px-4 py-3 outline-none focus:border-wine" placeholder="Studio name">
           <label class="mt-5 block text-sm font-semibold" for="contact">Email or Instagram</label><input id="contact" required class="mt-2 w-full rounded-lg border border-stone-300 bg-paper px-4 py-3 outline-none focus:border-wine" placeholder="you@email.com or @handle">
           <label class="mt-5 block text-sm font-semibold" for="film">Film or portfolio link</label><input id="film" type="url" class="mt-2 w-full rounded-lg border border-stone-300 bg-paper px-4 py-3 outline-none focus:border-wine" placeholder="https://">
           <button class="mt-6 w-full rounded-full bg-wine px-6 py-3.5 font-semibold text-white hover:bg-ink">Prepare my request</button>
-          <p id="formStatus" class="mt-4 hidden text-sm leading-6"></p>
+          <p class="mt-4 text-sm leading-6 text-stone-600">Confirm your project with us on Instagram. We will send a US$29 PayPal invoice after agreeing on the scope. Delivery is within 12 hours of payment and receipt of your complete story brief.</p>
+          <a id="contactLink" href="https://www.instagram.com/paydma.action/" target="_blank" rel="noopener noreferrer" class="mt-4 block text-center font-semibold text-wine underline underline-offset-4">Open VowScene on Instagram</a>
+          <p id="formStatus" role="status" class="mt-4 hidden text-sm leading-6"></p>
         </form>
       </div>
     </section>
@@ -90,12 +92,11 @@
   <footer class="border-t border-stone-300 px-6 py-8 text-center text-xs text-stone-500">VowScene - Custom writing for wedding filmmakers. No couple data is stored on this page.</footer>
 
   <script>
-    const CONTACT_EMAIL=''; // OWNER: add the PayPal/contact email before publishing.
-    const PAYPAL_INVOICE_NOTE='Payment is requested only after scope confirmation.';
+    const PAYPAL_INVOICE_NOTE='US$29 via PayPal invoice after scope confirmation. Delivery within 12 hours after payment and receipt of the complete story brief. One revision included.';
     document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('show')},{threshold:.12}).observe(el));
     const toneCopy={romantic:'For films that feel intimate, graceful and emotionally restrained.',documentary:'For films built from real details, honest voices and the couple’s own language.',playful:'For couples whose chemistry lives in private jokes, happy chaos and perfect timing.'};
     document.querySelectorAll('.tone').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tone').forEach(x=>x.classList.replace('border-wine','border-stone-300'));btn.classList.replace('border-stone-300','border-wine');document.getElementById('toneCopy').textContent=toneCopy[btn.dataset.tone]}));
-    document.getElementById('requestForm').addEventListener('submit',async e=>{e.preventDefault();const n=document.getElementById('name').value.trim(),c=document.getElementById('contact').value.trim(),f=document.getElementById('film').value.trim();const message=`VowScene script request\nStudio: ${n}\nContact: ${c}\nFilm: ${f||'Not provided'}\n${PAYPAL_INVOICE_NOTE}`;const status=document.getElementById('formStatus');try{await navigator.clipboard.writeText(message);status.textContent=CONTACT_EMAIL?`Request copied. Email it to ${CONTACT_EMAIL}.`:'Request copied. Reply in the same DM conversation to continue.';status.className='mt-4 text-sm leading-6 text-green-700'}catch{status.textContent=message;status.className='mt-4 whitespace-pre-line text-sm leading-6 text-stone-600'}});
+    document.getElementById('requestForm').addEventListener('submit',async e=>{e.preventDefault();const n=document.getElementById('name').value.trim(),c=document.getElementById('contact').value.trim(),f=document.getElementById('film').value.trim();const message=`VowScene script request\nStudio: ${n}\nContact: ${c}\nFilm: ${f||'Not provided'}\n${PAYPAL_INVOICE_NOTE}`;const status=document.getElementById('formStatus');try{await navigator.clipboard.writeText(message);status.textContent='Request copied. Open VowScene on Instagram using the link above, then paste and send your request. Your request has not been sent yet.';status.className='mt-4 text-sm leading-6 text-green-700'}catch{status.textContent='Copy the request below, then open VowScene on Instagram using the link above and send it.\n\n'+message;status.className='mt-4 whitespace-pre-line text-sm leading-6 text-stone-600'}});
   </script>
 </body>
 </html>
