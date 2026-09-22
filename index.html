@@ -8,6 +8,7 @@
   <meta property="og:description" content="A custom 60-90 second love-story voiceover, written to fit your wedding film.">
   <meta property="og:type" content="website">
   <title>VowScene - Cinematic voiceover scripts for wedding films</title>
+  <link rel="stylesheet" href="assets/studio-shell.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config={theme:{extend:{colors:{ink:'#1c1917',paper:'#f7f3ed',wine:'#7b2f3c',gold:'#bd8b4b'},fontFamily:{serif:['Georgia','Cambria','Times New Roman','serif'],sans:['Inter','Arial','sans-serif']}}}}
@@ -19,9 +20,11 @@
   </style>
 </head>
 <body class="grain font-sans antialiased">
-  <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-    <a href="#top" class="font-serif text-xl tracking-wide">VowScene</a>
-    <a href="#sample" class="text-sm underline decoration-gold underline-offset-4">Read a sample</a>
+  <header class="studio-shell studio-header studio-shell--stories">
+    <div class="studio-header__inner">
+      <a class="studio-brand" href="#top"><span class="studio-brand__mark" aria-hidden="true">V</span><span class="studio-brand__text"><span class="studio-brand__name">VowScene</span><span class="studio-brand__type">Stories for wedding films</span></span></a>
+      <nav class="studio-nav" aria-label="VowScene navigation"><a href="#sample">Sample</a><a href="#order">Pricing</a><a class="studio-nav__cta" href="#order">Request a script</a></nav>
+    </div>
   </header>
 
   <main id="top">
@@ -89,7 +92,7 @@
     </section>
   </main>
 
-  <footer class="border-t border-stone-300 px-6 py-8 text-center text-xs text-stone-500">VowScene - Custom writing for wedding filmmakers. No couple data is stored on this page.</footer>
+  <footer class="studio-shell studio-footer studio-shell--stories"><div class="studio-footer__inner"><div><p class="studio-footer__label">Independent studio services</p><p class="studio-footer__note">VowScene creates custom writing for wedding filmmakers. No couple data is stored on this page. GuideLift is a separate service for vacation-rental managers.</p></div><nav class="studio-footer__links" aria-label="Other studio services"><a href="./" aria-current="page">VowScene</a><a href="guidelift/">GuideLift Studio</a></nav></div></footer>
 
   <script>
     const PAYPAL_INVOICE_NOTE='US$29 via PayPal invoice after scope confirmation. Delivery within 12 hours after payment and receipt of the complete story brief. One revision included.';

@@ -1,0 +1,21 @@
+.studio-shell{--studio-accent:#7b2f3c;--studio-ink:#1c1917;--studio-paper:#f7f3ed;--studio-line:#d6cec3;color:var(--studio-ink);font-family:Inter,Arial,sans-serif}
+.studio-shell--stays{--studio-accent:#24483b;--studio-ink:#17201c;--studio-paper:#fbf9f4;--studio-line:#d9d2c5}
+.studio-header{border-bottom:1px solid var(--studio-line);background:var(--studio-paper)}
+.studio-header__inner,.studio-footer__inner{width:min(1160px,calc(100% - 40px));margin:auto}
+.studio-header__inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.studio-brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--studio-ink)}
+.studio-brand__mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--studio-accent);border-radius:50%;color:var(--studio-accent);font:italic 700 21px Georgia,serif}
+.studio-brand__text{display:grid;line-height:1.15}
+.studio-brand__name{font:700 1.3rem Georgia,Cambria,serif;letter-spacing:-.025em}
+.studio-brand__type{margin-top:4px;color:#68645e;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.studio-nav{display:flex;align-items:center;gap:22px}
+.studio-nav a{color:var(--studio-ink);font-size:.85rem;font-weight:700;text-decoration:none}
+.studio-nav a:hover,.studio-footer a:hover{color:var(--studio-accent);text-decoration:underline;text-underline-offset:4px}
+.studio-nav .studio-nav__cta{padding:10px 16px;border:1px solid var(--studio-accent);border-radius:999px;color:var(--studio-accent)}
+.studio-footer{border-top:1px solid var(--studio-line);background:var(--studio-paper)}
+.studio-footer__inner{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;padding:30px 0}
+.studio-footer__label{margin:0 0 8px;color:var(--studio-accent);font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.studio-footer__note{max-width:650px;margin:0;color:#68645e;font-size:.8rem;line-height:1.6}
+.studio-footer__links{display:flex;gap:18px;flex-wrap:wrap;white-space:nowrap}
+.studio-footer a{color:var(--studio-ink);font-size:.8rem;font-weight:700;text-decoration:none}
+@media(max-width:680px){.studio-header__inner{min-height:70px;gap:12px}.studio-nav{gap:12px}.studio-nav a:not(.studio-nav__cta){display:none}.studio-brand__name{font-size:1.08rem}.studio-brand__type{display:none}.studio-nav .studio-nav__cta{padding:9px 11px;font-size:.75rem;white-space:nowrap}.studio-footer__inner{display:block}.studio-footer__links{margin-top:18px}}
