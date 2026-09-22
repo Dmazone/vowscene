@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>VowScene — Story brief</title>
+  <link rel="stylesheet" href="assets/studio-shell.css"><script defer src="assets/i18n-data.js"></script><script defer src="assets/i18n.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>body{background:#f7f3ed;color:#1c1917;overflow-x:hidden}.serif{font-family:Georgia,Cambria,serif}label{overflow-wrap:anywhere}</style>
 </head>
 <body class="antialiased">
   <main class="mx-auto max-w-3xl px-5 py-12">
+    <div class="flex justify-end"><label class="language-control"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-4 6-4 9s1 6 4 9M12 3c3 3 4 6 4 9s-1 6-4 9"/></svg><select class="site-language" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="es">Español</option><option value="fr">Français</option></select></label></div>
     <p class="text-sm tracking-[.22em] text-[#7b2f3c]">VOWSCENE</p>
     <h1 class="serif mt-4 text-4xl">Tell us what only their people know.</h1>
     <p class="mt-4 leading-7 text-stone-600">Short, honest details make the strongest film. Your answers stay in this browser until you copy them.</p>
@@ -17,17 +19,17 @@
       <label class="block">How did they meet?<textarea name="meeting" required rows="3" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
       <label class="block">Three specific memories, habits or private jokes<textarea name="details" required rows="4" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
       <label class="block">What do they admire about each other?<textarea name="admire" rows="3" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
-      <label class="block">Tone<select name="tone" class="mt-2 w-full rounded-lg border p-3"><option>Romantic</option><option>Documentary</option><option>Playful</option></select></label>
+      <label class="block">Tone<select name="tone" class="mt-2 w-full rounded-lg border p-3"><option value="Romantic">Romantic</option><option value="Documentary">Documentary</option><option value="Playful">Playful</option></select></label>
       <label class="block">Available footage / moments to feature<textarea name="footage" rows="3" class="mt-2 w-full rounded-lg border p-3" placeholder="First look, vows, coffee shop, family reactions..."></textarea></label>
       <label class="block">Anything to avoid?<textarea name="avoid" rows="2" class="mt-2 w-full rounded-lg border p-3"></textarea></label>
-      <label class="block">Target length<select name="length" class="mt-2 w-full rounded-lg border p-3"><option>60 seconds</option><option>75 seconds</option><option>90 seconds</option></select></label>
+      <label class="block">Target length<select name="length" class="mt-2 w-full rounded-lg border p-3"><option value="60 seconds">60 seconds</option><option value="75 seconds">75 seconds</option><option value="90 seconds">90 seconds</option></select></label>
       <button class="w-full rounded-full bg-[#7b2f3c] px-6 py-4 font-semibold text-white">Copy completed brief</button>
       <p id="status" role="status" class="hidden text-sm"></p>
       <a href="https://www.instagram.com/paydma.action/" target="_blank" rel="noopener noreferrer" class="block text-center font-semibold text-[#7b2f3c] underline">Open VowScene on Instagram to send your brief</a>
     </form>
   </main>
   <script>
-    document.getElementById('brief').addEventListener('submit',async e=>{e.preventDefault();const rows=[...new FormData(e.target)].map(([k,v])=>`${k.toUpperCase()}: ${v.trim()}`);const text=`VOWSCENE STORY BRIEF\n\n${rows.join('\n\n')}`;const s=document.getElementById('status');try{await navigator.clipboard.writeText(text);s.textContent='Copied. Paste this into your conversation with VowScene.';s.className='text-sm text-green-700'}catch{s.textContent=text;s.className='whitespace-pre-wrap text-sm text-stone-600'}});
+    document.getElementById('brief').addEventListener('submit',async e=>{e.preventDefault();const rows=[...new FormData(e.target)].map(([k,v])=>`${k.toUpperCase()}: ${v.trim()}`);const text=`VOWSCENE STORY BRIEF\n\n${rows.join('\n\n')}`;const s=document.getElementById('status');try{await navigator.clipboard.writeText(text);s.textContent=window.siteT?.('Copied. Paste this into your conversation with VowScene.')||'Copied. Paste this into your conversation with VowScene.';s.className='text-sm text-green-700'}catch{s.textContent=text;s.className='whitespace-pre-wrap text-sm text-stone-600'}});
   </script>
 </body>
 </html>

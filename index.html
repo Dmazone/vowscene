@@ -9,6 +9,7 @@
   <meta property="og:type" content="website">
   <title>VowScene - Cinematic voiceover scripts for wedding films</title>
   <link rel="stylesheet" href="assets/studio-shell.css">
+  <script defer src="assets/i18n-data.js"></script><script defer src="assets/i18n.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config={theme:{extend:{colors:{ink:'#1c1917',paper:'#f7f3ed',wine:'#7b2f3c',gold:'#bd8b4b'},fontFamily:{serif:['Georgia','Cambria','Times New Roman','serif'],sans:['Inter','Arial','sans-serif']}}}}
@@ -23,7 +24,7 @@
   <header class="studio-shell studio-header studio-shell--stories">
     <div class="studio-header__inner">
       <a class="studio-brand" href="#top"><span class="studio-brand__mark" aria-hidden="true">V</span><span class="studio-brand__text"><span class="studio-brand__name">VowScene</span><span class="studio-brand__type">Stories for wedding films</span></span></a>
-      <nav class="studio-nav" aria-label="VowScene navigation"><a href="#sample">Sample</a><a href="#order">Pricing</a><a class="studio-nav__cta" href="#order">Request a script</a></nav>
+      <nav class="studio-nav" aria-label="VowScene navigation"><a href="#sample">Sample</a><a href="#order">Pricing</a><a class="studio-nav__cta" href="#order">Request a script</a><label class="language-control"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3 3-4 6-4 9s1 6 4 9M12 3c3 3 4 6 4 9s-1 6-4 9"/></svg><select class="site-language" aria-label="Language"><option value="en">English</option><option value="ko">한국어</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="es">Español</option><option value="fr">Français</option></select></label></nav>
     </div>
   </header>
 
@@ -98,8 +99,9 @@
     const PAYPAL_INVOICE_NOTE='US$29 via PayPal invoice after scope confirmation. Delivery within 12 hours after payment and receipt of the complete story brief. One revision included.';
     document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(([e])=>{if(e.isIntersecting)e.target.classList.add('show')},{threshold:.12}).observe(el));
     const toneCopy={romantic:'For films that feel intimate, graceful and emotionally restrained.',documentary:'For films built from real details, honest voices and the couple’s own language.',playful:'For couples whose chemistry lives in private jokes, happy chaos and perfect timing.'};
-    document.querySelectorAll('.tone').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tone').forEach(x=>x.classList.replace('border-wine','border-stone-300'));btn.classList.replace('border-stone-300','border-wine');document.getElementById('toneCopy').textContent=toneCopy[btn.dataset.tone]}));
-    document.getElementById('requestForm').addEventListener('submit',async e=>{e.preventDefault();const n=document.getElementById('name').value.trim(),c=document.getElementById('contact').value.trim(),f=document.getElementById('film').value.trim();const message=`VowScene script request\nStudio: ${n}\nContact: ${c}\nFilm: ${f||'Not provided'}\n${PAYPAL_INVOICE_NOTE}`;const status=document.getElementById('formStatus');try{await navigator.clipboard.writeText(message);status.textContent='Request copied. Open VowScene on Instagram using the link above, then paste and send your request. Your request has not been sent yet.';status.className='mt-4 text-sm leading-6 text-green-700'}catch{status.textContent='Copy the request below, then open VowScene on Instagram using the link above and send it.\n\n'+message;status.className='mt-4 whitespace-pre-line text-sm leading-6 text-stone-600'}});
+    document.querySelectorAll('.tone').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tone').forEach(x=>x.classList.replace('border-wine','border-stone-300'));btn.classList.replace('border-stone-300','border-wine');document.getElementById('toneCopy').textContent=window.siteT?.(toneCopy[btn.dataset.tone])||toneCopy[btn.dataset.tone]}));
+    document.getElementById('requestForm').addEventListener('submit',async e=>{e.preventDefault();const n=document.getElementById('name').value.trim(),c=document.getElementById('contact').value.trim(),f=document.getElementById('film').value.trim();const message=`VowScene script request\nStudio: ${n}\nContact: ${c}\nFilm: ${f||'Not provided'}\n${PAYPAL_INVOICE_NOTE}`;const status=document.getElementById('formStatus');try{await navigator.clipboard.writeText(message);status.textContent=window.siteT?.('Request copied. Open VowScene on Instagram using the link above, then paste and send your request. Your request has not been sent yet.')||'Request copied. Open VowScene on Instagram using the link above, then paste and send your request. Your request has not been sent yet.';status.className='mt-4 text-sm leading-6 text-green-700'}catch{status.textContent=(window.siteT?.('Copy the request below, then open VowScene on Instagram using the link above and send it.')||'Copy the request below, then open VowScene on Instagram using the link above and send it.')+'\n\n'+message;status.className='mt-4 whitespace-pre-line text-sm leading-6 text-stone-600'}});
+    document.addEventListener('site-language-change',()=>{const selected=document.querySelector('.tone.border-wine');if(selected)document.getElementById('toneCopy').textContent=window.siteT(toneCopy[selected.dataset.tone])});
   </script>
 </body>
 </html>
